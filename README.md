@@ -15,4 +15,9 @@
 
 
 # Best of:
-
+```
+####################
+Detailed explanation of the "thalamic switch" hypothesis of anesthesia?
+The thalamic switch hypothesis of anesthesia is a theory that suggests that anesthesia is caused by a change in the activity of the thalamus, a region of the brain that plays a role in consciousness. The theory suggests that under anesthesia, the thalamus becomes less active, which leads to a loss of consciousness.
+####################
+```
