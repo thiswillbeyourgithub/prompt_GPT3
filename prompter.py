@@ -84,9 +84,10 @@ if __name__ == "__main__":
                                                 temperature=t,
                                                 max_tokens=2000,
                                                 top_p=1,
-                                                best_of=1,
-                                                frequency_penalty=0,
-                                                presence_penalty=0.4)
+                                                best_of=2,
+                                                frequency_penalty=0.1,
+                                                presence_penalty=0.6
+                                                )
             print("\n" + "#" * 20)
 
             if question == "":
