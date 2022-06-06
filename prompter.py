@@ -2,25 +2,44 @@ from pathlib import Path
 import openai
 import time
 import logging
+from prompt_toolkit import prompt
+from prompt_toolkit.completion import WordCompleter
+
 
 ### SETTINGS #####################################
 default_t = 0.1
-default_language = "french"
-default_mode = "cloze"
-openai.api_key = str(Path("API_KEY.txt").read_text()).strip()
+maximum_tokens = 2000
+default_language = "english"
+default_translation = "french_to_spanish"
+default_mode = "freewriting"
 
+### VARIABLES ####################################
+openai.api_key = str(Path("API_KEY.txt").read_text()).strip()
+possible_modes = ["cloze", "freewriting", "translate"]
 cloze_prompts = {
     "english": "Q: In what year was Napoleon born?\nA: {{c1::Napoleon was born in 1769}}\n\nQ: 1+1?\nA: {{c1::1+1 equals 2}}\n\nQ: Capital of France?\nA: {{c1::Paris is the capital of France}}\n\nQ: ",
     "french": "Q: Année de naissance de Napoléon ?\nA: {{c1::Napoléon est né en 1769}}\n\nQ: 1+1 ?\nA: {{c1::1+1 vaut 2}}\n\nQ: Capitale de la France ?\nA: {{c1::Paris est la capitale de la France}}\n\nQ: "
     }
+translate_prompts = {
+        "english_to_spanish": "Q: The weather is nice today.\nA: El clima es agradable hoy.\n\nQ: I love you.\nA:Te amo.\n\nQ: ",
+        "french_to_spanish": "Q: Il fait beau aujourd'hui.\nA: Hace buen tiempo hoy.\n\nQ: Je t'aime.\nA:Te amo.\n\nQ: "
+        }
+        
 
 ##################################################
 
-def input2(prompt):
+def ask_user(q, completer_list=None, dont_catch=False):
+    "prompt user but catch keyboard interruption"
+    autocomplete = WordCompleter(completer_list, match_middle=True, ignore_case=True) if completer_list else None
     try:
-        return input(prompt)
+        return prompt(q, completer=autocomplete)
     except KeyboardInterrupt:
-        raise SystemExit()
+        if dont_catch:
+            raise KeyboardInterrupt  # this way, ctrl+c can be used either to
+        # terminate the script if in the outer loop or to break the inner
+        # while loop
+        else:
+            raise SystemExit()
 
 
 if __name__ == "__main__":
@@ -30,69 +49,79 @@ if __name__ == "__main__":
                     format=f"{time.asctime()}: %(message)s")
     log = logging.getLogger()
     log.setLevel(logging.INFO)
+    language = None
+    trans_lan = None
+    previous_questions = []
 
     while True:
         # choose a temperature
-        t = input2(f"Temperature settings? (0 to 1)\n>")
+        t = ask_user(f"Temperature settings? (0 to 1)\n>")
         if t == "":
             print(f"Temperature set to {default_t}\n")
             t = default_t
-        try:
-            t = float(t)
-        except Exception:
-            pass
+        else:
+            try:
+                t = float(t)
+            except Exception:
+                pass
         assert isinstance(t, float), f"Wrong value for temperature: {t}"
         assert t <= 1 and t >= 0, f"Wrong value for temperature: must be between 0 and 1"
 
         # choose a mode
-        mode = input2("Mode ? (freewriting / cloze)\n>")
+        mode = ask_user(f"Mode ? ({', '.join(possible_modes)})\n>", possible_modes)
         if mode == "":
             print(f"Mode set to {default_mode}\n")
             mode = default_mode
-        assert mode.startswith("f") or mode.startswith("c"), f"Wrong value for mode: {mode}"
-        if mode.startswith("f"):
-            mode = "freewriting"
-        elif mode.startswith("c"):
-            mode = "cloze"
+        assert mode in possible_modes
 
         if mode == "cloze":
             # chose a language
-            language = input2("Language? (english / french)\n>")
+            possible_cloze_languages = cloze_prompts.keys()
+            language = ask_user(f"Language? ({', '.join(possible_cloze_languages)})\n>", possible_cloze_languages)
             if language == "":
-                print(f"Set default language to {default_language}\n")
+                print(f"Language set to {default_language}\n")
                 language = default_language
-            if language.startswith("e"):
-                language = "english"
-            elif language.startswith("f"):
-                language = "french"
-            else:
-                raise SystemExit(f"Wrong value for language: {language}")
-        else:
-            language = None
-        log.info(f"\n\nNew session: T={t} ; Mode={mode} ; Language={language}")
+            assert language in possible_cloze_languages, f"Wrong value for language: {language}"
+        elif mode == "translate":
+            # chose a language
+            possible_translation = translate_prompts.keys()
+            trans_lan = ask_user(f"Language? ({', '.join(possible_translation)})\n>", possible_translation)
+            if trans_lan == "":
+                print(f"Language set to {default_translation}\n")
+                trans_lan = default_translation
+            assert trans_lan in possible_translation, f"Wrong value for translation: {trans_lan}"
+
+        log.info(f"\n\nNew session: T={t} ; Mode={mode} ; Language={language} ; Translation={trans_lan}")
 
         while True:
             try:
-                question = input("\n\nWhat's your question? (ctrl+c to restart)  > ").strip()
+                question = ask_user("\n\nWhat's your question? (ctrl+c to restart)  > ", previous_questions, True).strip()
             except KeyboardInterrupt:
                 print("\n"*3)
                 break
 
-            if mode == "freewriting":
-                p = question
-            elif mode == "cloze":
+            if mode == "cloze":
                 if not question.endswith("?"):
+                    # correct space location for question mark
                     if language == "french":
                         question += " ?"
-                    elif language == "english":
+                    else:
                         question += "?"
+                # makes sure to have a first letter be uppercase
                 question = question[0].upper() + question[1:]
-                p = cloze_prompts[language] + question + "\nA:",
+                previous_questions.append(question)
+                p = cloze_prompts[language] + question + "\nA:"
+            elif mode == "translate":
+                question = question[0].upper() + question[1:]
+                p = translate_prompts[trans_lan] + question + "\nA:"
+            else:
+                p = question
+                previous_questions.append(p)
 
             response = openai.Completion.create(engine="text-davinci-002",
                                                 prompt=p,
                                                 temperature=t,
-                                                max_tokens=2000,
+                                                max_tokens=maximum_tokens,
                                                 top_p=1,
                                                 ##############################################
                                                 ##### DO NOT CHANGE THE VALUE BEST_OF PLEASE #
