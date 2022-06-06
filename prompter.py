@@ -1,5 +1,7 @@
 from pathlib import Path
 import openai
+import time
+import logging
 
 ### SETTINGS #####################################
 default_t = 0.1
@@ -22,6 +24,13 @@ def input2(prompt):
 
 
 if __name__ == "__main__":
+    Path("logs.txt").touch(exist_ok=True)
+    logging.basicConfig(filename="logs.txt",
+                    filemode='a',
+                    format=f"{time.asctime()}: %(message)s")
+    log = logging.getLogger()
+    log.setLevel(logging.INFO)
+
     while True:
         # choose a temperature
         t = input2(f"Temperature settings? (0 to 1)\n>")
@@ -60,6 +69,7 @@ if __name__ == "__main__":
                 raise SystemExit(f"Wrong value for language: {language}")
         else:
             language = None
+        log.info(f"\n\nNew session: T={t} ; Mode={mode} ; Language={language}")
 
         while True:
             try:
@@ -100,7 +110,10 @@ if __name__ == "__main__":
             else:
                 try:
                     print(question)
-                    print(str(response["choices"][0]["text"]).strip())
+                    ans = str(response["choices"][0]["text"]).strip()
+                    print(ans)
+                    log.info(f"Q: {question}")
+                    log.info(f"A: {ans}")
                     print("#" * 20 + "\n")
                 except Exception as e:
                     print(f"Error : {str(e)}")
