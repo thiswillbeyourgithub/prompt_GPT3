@@ -33,7 +33,7 @@ def ask_user(q, completer_list=None, dont_catch=False):
     autocomplete = WordCompleter(completer_list, match_middle=True, ignore_case=True) if completer_list else None
     try:
         return prompt(q, completer=autocomplete)
-    except KeyboardInterrupt:
+    except (KeyboardInterrupt, EOFError):
         if dont_catch:
             raise KeyboardInterrupt  # this way, ctrl+c can be used either to
         # terminate the script if in the outer loop or to break the inner
