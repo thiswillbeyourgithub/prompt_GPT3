@@ -84,7 +84,11 @@ if __name__ == "__main__":
                                                 temperature=t,
                                                 max_tokens=2000,
                                                 top_p=1,
-                                                best_of=2,
+                                                ##############################################
+                                                ##### DO NOT CHANGE THE VALUE BEST_OF PLEASE #
+                                                best_of=1, ###################################
+                                                ##### DO NOT CHANGE THE VALUE BEST_OF PLEASE #
+                                                ##############################################
                                                 frequency_penalty=0.1,
                                                 presence_penalty=0.6
                                                 )
