@@ -51,6 +51,9 @@ if __name__ == "__main__":
     log.setLevel(logging.INFO)
     language = None
     trans_lan = None
+    assert default_translation in translate_prompts.keys(), f"Wrong default translation value: {default_translation}"
+    assert isinstance(default_t, float) and default_t <= 1 and default_t >= 0, f"Wrong default temperature value: {default_t}"
+    assert default_language in cloze_prompts.keys(), f"Wrong default value for language: {default_language}"
     previous_questions = []
 
     while True:
