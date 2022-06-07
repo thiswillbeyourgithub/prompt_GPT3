@@ -20,10 +20,21 @@
 Detailed explanation of the "thalamic switch" hypothesis of anesthesia?
 The thalamic switch hypothesis of anesthesia is a theory that suggests that anesthesia is caused by a change in the activity of the thalamus, a region of the brain that plays a role in consciousness. The theory suggests that under anesthesia, the thalamus becomes less active, which leads to a loss of consciousness.
 ####################
-What are example of density based clustering algorithms?
-There are many density based clustering algorithms, but some examples include DBSCAN and OPTICS.
+Top 5 density-based clustering algorithm:
+1. DBSCAN
+2. OPTICS
+3. HDBSCAN
+4. CURE
+5. ROCK
 ####################
-What are example of fuzzy clustering algorithms?
-There are many examples of fuzzy clustering algorithms, but a few popular ones are the c-means algorithm, the Gustafson-Kessel algorithm, and the fuzzy c-means algorithm.
+Top 5 fuzzy clustering algorithms:
+1. Fuzzy c-means (FCM)
+2. Possibilistic c-means (PCM)
+3. Gustafson-Kessel algorithm (GKA)
+4. Neural network based fuzzy c-means (NNFCM)
+5. Fuzzy ARTMAP
+####################
+What role did NATO play in the 2022 war between Ukraine and Russia? (note: keep in mind that the training stopped in june of 2021, so 7 months before the war!)
+NATO played a limited role in the war, providing some military aid to Ukraine but not directly engaging in combat operations.
 ####################
 ```
