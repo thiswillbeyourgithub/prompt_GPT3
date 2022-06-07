@@ -10,7 +10,7 @@ from prompt_toolkit.completion import WordCompleter
 default_t = 0.1
 maximum_tokens = 2000
 default_language = "english"
-default_translation = "french_to_spanish"
+default_translation = "french_to_argentinian"
 default_mode = "freewriting"
 
 ### VARIABLES ####################################
@@ -21,8 +21,8 @@ cloze_prompts = {
     "french": "Q: Année de naissance de Napoléon ?\nA: {{c1::Napoléon est né en 1769}}\n\nQ: 1+1 ?\nA: {{c1::1+1 vaut 2}}\n\nQ: Capitale de la France ?\nA: {{c1::Paris est la capitale de la France}}\n\nQ: "
     }
 translate_prompts = {
-        "english_to_spanish": "Q: The weather is nice today.\nA: El clima es agradable hoy.\n\nQ: I love you.\nA:Te amo.\n\nQ: ",
-        "french_to_spanish": "Q: Il fait beau aujourd'hui.\nA: Hace buen tiempo hoy.\n\nQ: Je t'aime.\nA:Te amo.\n\nQ: "
+        "english_to_argentinian": "Translate this sentence to argentinian: '",
+        "french_to_argentinian": "Traduit cette phrase en argentin: '"
         }
         
 
@@ -116,7 +116,7 @@ if __name__ == "__main__":
                 p = cloze_prompts[language] + question + "\nA:"
             elif mode == "translate":
                 question = question[0].upper() + question[1:]
-                p = translate_prompts[trans_lan] + question + "\nA:"
+                p = translate_prompts[trans_lan] + question + "'"
             else:
                 p = question
                 previous_questions.append(p)
