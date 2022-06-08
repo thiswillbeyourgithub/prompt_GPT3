@@ -111,9 +111,11 @@ if __name__ == "__main__":
 
         log.info(f"\n\nNew session: T={t} ; Mode={mode} ; Language={language} ; Translation={trans_lan}")
 
+        print("\n(Press ctrl+c to go edit settings, again to exit)\n")
+
         while True:
             try:
-                question = ask_user("\n\nWhat's your question? (ctrl+c to restart)  > ", previous_questions, True).strip()
+                question = ask_user("\n\nWhat's your question?\n> ", previous_questions, True).strip()
             except KeyboardInterrupt:
                 print("\n"*3)
                 break
