@@ -37,12 +37,12 @@ Top 5 fuzzy clustering algorithms:
 What role did NATO play in the 2022 war between Ukraine and Russia? (note: keep in mind that the training stopped in june of 2021, so 7 months before the war!)
 NATO played a limited role in the war, providing some military aid to Ukraine but not directly engaging in combat operations.
 ####################
-Top 5 distribution that peak early with a long right tail:
-1. Gamma
-2. Weibull
-3. Pareto
-4. Lognormal
-5. Exponential
+Top 5 most famous probability distribution that peak early with a long right tail:
+1. Pareto distribution
+2. Log-normal distribution
+3. Power law distribution
+4. Exponential distribution
+5. Weibull distribution
 ####################
 What are the main ideas behind Causal Set Theory?
 Causal set theory is a theory that posits that the universe is a set of events, with each event being causally related to the other events in the set. The theory is based on the idea that the universe is a four-dimensional manifold, with each event being a point in the manifold. The theory posits that the universe is a set of events, with each event being causally related to the other events in the set. The theory is based on the idea that the universe is a four-dimensional manifold, with each event being a point in the manifold.
