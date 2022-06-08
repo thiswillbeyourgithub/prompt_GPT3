@@ -37,4 +37,11 @@ Top 5 fuzzy clustering algorithms:
 What role did NATO play in the 2022 war between Ukraine and Russia? (note: keep in mind that the training stopped in june of 2021, so 7 months before the war!)
 NATO played a limited role in the war, providing some military aid to Ukraine but not directly engaging in combat operations.
 ####################
+Top 5 distribution that peak early with a long right tail:
+1. Gamma
+2. Weibull
+3. Pareto
+4. Lognormal
+5. Exponential
+####################
 ```
