@@ -54,7 +54,22 @@ if __name__ == "__main__":
     assert default_translation in translate_prompts.keys(), f"Wrong default translation value: {default_translation}"
     assert isinstance(default_t, float) and default_t <= 1 and default_t >= 0, f"Wrong default temperature value: {default_t}"
     assert default_language in cloze_prompts.keys(), f"Wrong default value for language: {default_language}"
+
+    loaded_logs = Path("logs.txt").read_text().split("\n")
     previous_questions = []
+    for line in loaded_logs:
+        if " Q: " in line:
+            inc = 0
+            while inc < len(line):
+                inc+=1
+                if line[inc:].startswith(" Q: "):
+                    candidate = line[inc+4:]
+                    if candidate not in previous_questions and candidate.strip() not in previous_questions and candidate != "":
+                        previous_questions.append(candidate)
+                    break
+    if previous_questions:
+        print(f"Loaded {len(previous_questions)} previous questions from logs.txt")
+    previous_questions.reverse()
 
     while True:
         # choose a temperature
