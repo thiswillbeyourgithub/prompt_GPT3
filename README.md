@@ -44,4 +44,8 @@ Top 5 distribution that peak early with a long right tail:
 4. Lognormal
 5. Exponential
 ####################
+What are the main ideas behind Causal Set Theory?
+Causal set theory is a theory that posits that the universe is a set of events, with each event being causally related to the other events in the set. The theory is based on the idea that the universe is a four-dimensional manifold, with each event being a point in the manifold. The theory posits that the universe is a set of events, with each event being causally related to the other events in the set. The theory is based on the idea that the universe is a four-dimensional manifold, with each event being a point in the manifold.
+####################
+
 ```
