@@ -15,7 +15,7 @@ default_mode = "freewriting"
 
 ### VARIABLES ####################################
 openai.api_key = str(Path("API_KEY.txt").read_text()).strip()
-possible_modes = ["cloze", "freewriting", "translate"]
+possible_modes = ["freewriting", "cloze", "translate"]
 cloze_prompts = {
     "english": "Q: In what year was Napoleon born?\nA: {{c1::Napoleon was born in 1769}}\n\nQ: 1+1?\nA: {{c1::1+1 equals 2}}\n\nQ: Capital of France?\nA: {{c1::Paris is the capital of France}}\n\nQ: ",
     "french": "Q: Année de naissance de Napoléon ?\nA: {{c1::Napoléon est né en 1769}}\n\nQ: 1+1 ?\nA: {{c1::1+1 vaut 2}}\n\nQ: Capitale de la France ?\nA: {{c1::Paris est la capitale de la France}}\n\nQ: "
