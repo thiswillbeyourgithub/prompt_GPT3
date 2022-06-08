@@ -138,19 +138,24 @@ if __name__ == "__main__":
                 p = question
                 previous_questions.append(p)
 
-            response = openai.Completion.create(engine="text-davinci-002",
-                                                prompt=p,
-                                                temperature=t,
-                                                max_tokens=maximum_tokens,
-                                                top_p=1,
-                                                ##############################################
-                                                ##### DO NOT CHANGE THE VALUE BEST_OF PLEASE #
-                                                best_of=1, ###################################
-                                                ##### DO NOT CHANGE THE VALUE BEST_OF PLEASE #
-                                                ##############################################
-                                                frequency_penalty=0.1,
-                                                presence_penalty=0.6
-                                                )
+            try:
+                response = openai.Completion.create(engine="text-davinci-002",
+                                                    prompt=p,
+                                                    temperature=t,
+                                                    max_tokens=maximum_tokens,
+                                                    top_p=1,
+                                                    ##############################################
+                                                    ##### DO NOT CHANGE THE VALUE BEST_OF PLEASE #
+                                                    best_of=1, ###################################
+                                                    ##### DO NOT CHANGE THE VALUE BEST_OF PLEASE #
+                                                    ##############################################
+                                                    frequency_penalty=0.1,
+                                                    presence_penalty=0.6
+                                                    )
+            except KeyboardInterrupt:
+                print("Exit.")
+                raise SystemExit()
+
             print("\n" + "#" * 20)
 
             if question == "":
