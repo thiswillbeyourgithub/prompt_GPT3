@@ -14,7 +14,8 @@ default_translation = "french_to_argentinian"
 default_mode = "freewriting"
 
 ### VARIABLES ####################################
-openai.api_key = str(Path("API_KEY.txt").read_text()).strip()
+local_dir = "/".join(__file__.split("/")[:-1])
+openai.api_key = str(Path(f"{local_dir}/API_KEY.txt").read_text()).strip()
 possible_modes = ["freewriting", "cloze", "translate"]
 cloze_prompts = {
     "english": "Q: In what year was Napoleon born?\nA: {{c1::Napoleon was born in 1769}}\n\nQ: 1+1?\nA: {{c1::1+1 equals 2}}\n\nQ: Capital of France?\nA: {{c1::Paris is the capital of France}}\n\nQ: ",
@@ -43,8 +44,8 @@ def ask_user(q, completer_list=None, dont_catch=False):
 
 
 if __name__ == "__main__":
-    Path("logs.txt").touch(exist_ok=True)
-    logging.basicConfig(filename="logs.txt",
+    Path(f"{local_dir}/logs.txt").touch(exist_ok=True)
+    logging.basicConfig(filename=f"{local_dir}/logs.txt",
                     filemode='a',
                     format=f"{time.asctime()}: %(message)s")
     log = logging.getLogger()
@@ -55,7 +56,7 @@ if __name__ == "__main__":
     assert isinstance(default_t, float) and default_t <= 1 and default_t >= 0, f"Wrong default temperature value: {default_t}"
     assert default_language in cloze_prompts.keys(), f"Wrong default value for language: {default_language}"
 
-    loaded_logs = Path("logs.txt").read_text().split("\n")
+    loaded_logs = Path(f"{local_dir}/logs.txt").read_text().split("\n")
     previous_questions = []
     for line in loaded_logs:
         if " Q: " in line:
