@@ -47,5 +47,8 @@ Top 5 most famous probability distribution that peak early with a long right tai
 What are the main ideas behind Causal Set Theory?
 Causal set theory is a theory that posits that the universe is a set of events, with each event being causally related to the other events in the set. The theory is based on the idea that the universe is a four-dimensional manifold, with each event being a point in the manifold. The theory posits that the universe is a set of events, with each event being causally related to the other events in the set. The theory is based on the idea that the universe is a four-dimensional manifold, with each event being a point in the manifold.
 ####################
+The difference between a normative and a descriptive statement is
+that a normative statement is a statement that prescribes what ought to be the case, while a descriptive statement is a statement that describes what actually is the case. A normative statement is a prescriptive statement, while a descriptive statement is a descriptive statement.
+####################
 
 ```
