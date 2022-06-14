@@ -50,5 +50,8 @@ Causal set theory is a theory that posits that the universe is a set of events, 
 The difference between a normative and a descriptive statement is
 that a normative statement is a statement that prescribes what ought to be the case, while a descriptive statement is a statement that describes what actually is the case. A normative statement is a prescriptive statement, while a descriptive statement is a descriptive statement.
 ####################
+An example of univariate analysis could be the following:
+A researcher is interested in understanding how different types of exercise affect weight loss. In this case, the researcher would want to compare the weight loss of those who engage in different types of exercise, such as running, swimming, or lifting weights. This would be an example of univariate analysis, as the researcher is only interested in one variable (weight loss) and how it is affected by different types of exercise.
+####################
 
 ```
