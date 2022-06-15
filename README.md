@@ -53,5 +53,24 @@ that a normative statement is a statement that prescribes what ought to be the c
 An example of univariate analysis could be the following:
 A researcher is interested in understanding how different types of exercise affect weight loss. In this case, the researcher would want to compare the weight loss of those who engage in different types of exercise, such as running, swimming, or lifting weights. This would be an example of univariate analysis, as the researcher is only interested in one variable (weight loss) and how it is affected by different types of exercise.
 ####################
+Here's an example of the argument fillcolor in the function go.Scatter of the library plotly:
+<code>import plotly.graph_objs as go
+
+trace = go.Scatter(
+    x=[1, 2, 3, 4],
+    y=[10, 11, 12, 13],
+    mode='markers',
+    marker=dict(
+        size=[40, 60, 80, 100],
+        color=[0, 1, 2, 3],
+        colorscale='Viridis',
+        showscale=True
+    )
+)
+data = [trace]
+plotly.offline.plot(data, filename='scatter-plot-with-colorscale')
+</code>
+####################
+
 
 ```
