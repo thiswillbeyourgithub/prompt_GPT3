@@ -17,44 +17,44 @@
 # Best of:
 ```
 ####################
-Detailed explanation of the "thalamic switch" hypothesis of anesthesia?
-The thalamic switch hypothesis of anesthesia is a theory that suggests that anesthesia is caused by a change in the activity of the thalamus, a region of the brain that plays a role in consciousness. The theory suggests that under anesthesia, the thalamus becomes less active, which leads to a loss of consciousness.
+Q: Detailed explanation of the "thalamic switch" hypothesis of anesthesia?
+A: The thalamic switch hypothesis of anesthesia is a theory that suggests that anesthesia is caused by a change in the activity of the thalamus, a region of the brain that plays a role in consciousness. The theory suggests that under anesthesia, the thalamus becomes less active, which leads to a loss of consciousness.
 ####################
-Top 5 density-based clustering algorithm:
-1. DBSCAN
+Q: Top 5 density-based clustering algorithm:
+A: 1. DBSCAN
 2. OPTICS
 3. HDBSCAN
 4. CURE
 5. ROCK
 ####################
-Top 5 fuzzy clustering algorithms:
-1. Fuzzy c-means (FCM)
+Q: Top 5 fuzzy clustering algorithms:
+A: 1. Fuzzy c-means (FCM)
 2. Possibilistic c-means (PCM)
 3. Gustafson-Kessel algorithm (GKA)
 4. Neural network based fuzzy c-means (NNFCM)
 5. Fuzzy ARTMAP
 ####################
-What role did NATO play in the 2022 war between Ukraine and Russia? (note: keep in mind that the training stopped in june of 2021, so 7 months before the war!)
-NATO played a limited role in the war, providing some military aid to Ukraine but not directly engaging in combat operations.
+Q: What role did NATO play in the 2022 war between Ukraine and Russia? (note: keep in mind that the training stopped in june of 2021, so 7 months before the war!)
+A: NATO played a limited role in the war, providing some military aid to Ukraine but not directly engaging in combat operations.
 ####################
-Top 5 most famous probability distribution that peak early with a long right tail:
-1. Pareto distribution
+Q: Top 5 most famous probability distribution that peak early with a long right tail:
+A: 1. Pareto distribution
 2. Log-normal distribution
 3. Power law distribution
 4. Exponential distribution
 5. Weibull distribution
 ####################
-What are the main ideas behind Causal Set Theory?
-Causal set theory is a theory that posits that the universe is a set of events, with each event being causally related to the other events in the set. The theory is based on the idea that the universe is a four-dimensional manifold, with each event being a point in the manifold. The theory posits that the universe is a set of events, with each event being causally related to the other events in the set. The theory is based on the idea that the universe is a four-dimensional manifold, with each event being a point in the manifold.
+Q: What are the main ideas behind Causal Set Theory?
+A: Causal set theory is a theory that posits that the universe is a set of events, with each event being causally related to the other events in the set. The theory is based on the idea that the universe is a four-dimensional manifold, with each event being a point in the manifold. The theory posits that the universe is a set of events, with each event being causally related to the other events in the set. The theory is based on the idea that the universe is a four-dimensional manifold, with each event being a point in the manifold.
 ####################
-The difference between a normative and a descriptive statement is
-that a normative statement is a statement that prescribes what ought to be the case, while a descriptive statement is a statement that describes what actually is the case. A normative statement is a prescriptive statement, while a descriptive statement is a descriptive statement.
+Q: The difference between a normative and a descriptive statement is
+A: that a normative statement is a statement that prescribes what ought to be the case, while a descriptive statement is a statement that describes what actually is the case. A normative statement is a prescriptive statement, while a descriptive statement is a descriptive statement.
 ####################
-An example of univariate analysis could be the following:
-A researcher is interested in understanding how different types of exercise affect weight loss. In this case, the researcher would want to compare the weight loss of those who engage in different types of exercise, such as running, swimming, or lifting weights. This would be an example of univariate analysis, as the researcher is only interested in one variable (weight loss) and how it is affected by different types of exercise.
+Q: An example of univariate analysis could be the following:
+A: A researcher is interested in understanding how different types of exercise affect weight loss. In this case, the researcher would want to compare the weight loss of those who engage in different types of exercise, such as running, swimming, or lifting weights. This would be an example of univariate analysis, as the researcher is only interested in one variable (weight loss) and how it is affected by different types of exercise.
 ####################
-Here's an example of the argument fillcolor in the function go.Scatter of the library plotly:
-<code>import plotly.graph_objs as go
+Q: Here's an example of the argument fillcolor in the function go.Scatter of the library plotly:
+A: <code>import plotly.graph_objs as go
 
 trace = go.Scatter(
     x=[1, 2, 3, 4],
