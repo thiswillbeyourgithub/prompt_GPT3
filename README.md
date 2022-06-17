@@ -71,6 +71,13 @@ data = [trace]
 plotly.offline.plot(data, filename='scatter-plot-with-colorscale')
 </code>
 ####################
+Q: An intuitive explanation of the term "autoregressive" in machine learning is
+A: that it is a type of model that predicts the value of a given variable based on its previous values.
+
+In other words, an autoregressive model is one where the value of a given variable at time t is predicted using a linear combination of past values of that variable.
+
+The term "autoregressive" comes from the fact that the model is regressing the value of the variable at time t onto past values of itself
+####################
 
 
 ```
