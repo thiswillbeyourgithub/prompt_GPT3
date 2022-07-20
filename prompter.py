@@ -66,7 +66,7 @@ if __name__ == "__main__":
                 if line[inc:].startswith(" Q: "):
                     candidate = line[inc+4:]
                     if candidate not in previous_questions and candidate.strip() not in previous_questions and candidate != "":
-                        previous_questions.append(candidate)
+                        previous_questions.insert(0, candidate)
                     break
     if previous_questions:
         print(f"Loaded {len(previous_questions)} previous questions from logs.txt")
