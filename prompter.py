@@ -150,7 +150,7 @@ if __name__ == "__main__":
                                                     best_of=1, ###################################
                                                     ##### DO NOT CHANGE THE VALUE BEST_OF PLEASE #
                                                     ##############################################
-                                                    frequency_penalty=0.1,
+                                                    frequency_penalty=0.5,
                                                     presence_penalty=0.6
                                                     )
             except KeyboardInterrupt:
