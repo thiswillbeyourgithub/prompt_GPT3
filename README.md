@@ -78,6 +78,9 @@ In other words, an autoregressive model is one where the value of a given variab
 
 The term "autoregressive" comes from the fact that the model is regressing the value of the variable at time t onto past values of itself
 ####################
+Q: An intuitive interpretation of impedance is
+A: that it encapsulates how easily current can flow in a circuit.
 
-
+The impedance of a circuit is a measure of the overall opposition that the circuit presents to alternating current. It is composed of two components: resistance and reactance. The resistance of a circuit is a measure of the opposition to the flow of current that is due to the collisions of the electrons with the atoms in the conductor. The reactance of a circuit is a measure of the opposition to the flow of current that is due to the inductive or capacitive effects in the circuit.
+####################
 ```
