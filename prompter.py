@@ -9,7 +9,7 @@ from prompt_toolkit.completion import WordCompleter
 
 ### SETTINGS #####################################
 default_t = 0.1
-maximum_tokens = 2000
+maximum_tokens = 4000
 default_language = "english"
 default_translation = "french_to_argentinian"
 default_mode = "freewriting"
