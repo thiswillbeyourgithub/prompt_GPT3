@@ -15,6 +15,7 @@
 ## What are 'modes' ?
 * `cloze` mode is what I used to quickly create flashcards for the spaced repetition software Anki. (note that this supports French and English)
 * `freewriting` mode can be used to use your own prompts.
+* `translate` quickly translate things
 * `paragraph_cloze` make close from paragraphs. This uses 2 prompts in a row, one to parse the structure of the input and one to create questions about it.
 
 
