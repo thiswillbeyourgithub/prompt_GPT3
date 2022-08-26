@@ -139,6 +139,10 @@ if __name__ == "__main__":
                 p = question
                 previous_questions.append(p)
 
+            if question == "":
+                print("Empty question.")
+                continue
+
             try:
                 response = openai.Completion.create(
                         engine="text-davinci-002",
@@ -161,17 +165,13 @@ if __name__ == "__main__":
 
             print("\n" + "#" * 20)
 
-            if question == "":
-                print("Empty question.")
-                continue
-            else:
-                try:
-                    print(question)
-                    ans = str(response["choices"][0]["text"]).strip()
-                    print(ans)
-                    log.info(f"Q: {question}")
-                    log.info(f"A: {ans}")
-                    print("#" * 20 + "\n")
-                except Exception as e:
-                    print(f"Error : {str(e)}")
-                    breakpoint()
+            try:
+                print(question)
+                ans = str(response["choices"][0]["text"]).strip()
+                print(ans)
+                log.info(f"Q: {question}")
+                log.info(f"A: {ans}")
+                print("#" * 20 + "\n")
+            except Exception as e:
+                print(f"Error : {str(e)}")
+                breakpoint()
