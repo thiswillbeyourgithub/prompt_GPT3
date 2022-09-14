@@ -20,7 +20,7 @@ openai.api_key = str(Path(f"{local_dir}/API_KEY.txt").read_text()).strip()
 possible_modes = ["freewriting", "cloze", "translate", "paragraph_cloze"]
 paragraph_cloze = {
         "parser": "Texte: Napoléon est né en 1769 à Ajaccio. Il est connu en tant que premier empereur des Français.\nStructure: Napoléon est (q1:né en 1769) (q2:à Ajaccio). Il est (q3:connu en tant que premier empereur des Français).\n\n Texte: Le pancréas est situé dans la partie postérieure de la cavité abdominale, devant le rachis et les organes rétropéritonéaux. Il est en majeure partie fixe, accolé en arrière par des fascias.\nStructure: Le pancréas est (q1:situé dans la partie postérieure de la cavité abdominale), (q2:devant le rachis et les organes rétropéritonéaux). Il (q3:est en majeure partie fixe), (q4:accolé en arrière) (q5:par des fascias).\n\nTexte: ",
-        "clozer": "Texte: Napoléon est (q1:né en 1769) (q2:à Ajaccio).\nQuestion1: Napoléon, année de naissance ?<br>{{cc1::Napoléon est né en 1769}}\nQuestion2: Napoléon, lieu de naissance ?<br>{{cc1::Napoléon est né à Ajaccio}}\n\nTexte: "
+        "clozer": "Texte: Napoléon est (q1:né en 1769) (q2:à Ajaccio).\nQuestion1: Napoléon, date de naissance ?<br>{{cc1::1769}}\nQuestion2: Napoléon, lieu de naissance ?<br>{{cc1::Ajaccio}}\n\nTexte: "
         }
 cloze_prompts = {
     "english": "Q: In what year was Napoleon born?\nA: {{c1::Napoleon was born in 1769}}\n\nQ: 1+1?\nA: {{c1::1+1 equals 2}}\n\nQ: Capital of France?\nA: {{c1::Paris is the capital of France}}\n\nQ: ",
