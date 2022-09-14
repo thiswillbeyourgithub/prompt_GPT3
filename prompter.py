@@ -94,6 +94,7 @@ if __name__ == "__main__":
     if previous_questions:
         print(f"Loaded {len(previous_questions)} previous questions from logs.txt")
     previous_questions.reverse()
+    previous_questions = [q.replace("\n", "\\n") for q in previous_questions]
 
     while True:
         # choose a temperature
@@ -177,7 +178,7 @@ if __name__ == "__main__":
                 print(f"\nStructure parsed:\n{structure}")
                 p = clozer + structure + "\nQuestion1: "
             elif mode == "freewriting":
-                previous_questions.append(question)
+                previous_questions.append(question.replace("\\n", "\n"))
                 p = question
             else:
                 raise ValueError
