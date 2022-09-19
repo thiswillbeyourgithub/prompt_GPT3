@@ -34,11 +34,11 @@ translate_prompts = {
 
 ##################################################
 
-def ask_user(q, completer_list=None, dont_catch=False):
+def ask_user(q, completer_list=None, dont_catch=False, vi_mode=False, multiline=False):
     "prompt user but catch keyboard interruption"
     autocomplete = WordCompleter(completer_list, match_middle=True, ignore_case=True) if completer_list else None
     try:
-        return prompt(q, completer=autocomplete)
+        return prompt(q, completer=autocomplete, vi_mode=vi_mode, multiline=multiline)
     except (KeyboardInterrupt, EOFError):
         if dont_catch:
             raise KeyboardInterrupt  # this way, ctrl+c can be used either to
@@ -143,7 +143,11 @@ if __name__ == "__main__":
 
         while True:
             try:
-                question = ask_user("\n\nWhat's your question?\n> ", previous_questions, True).strip()
+                question = ask_user("\n\nWhat's your question?\n> ",
+                                    completer_list=previous_questions,
+                                    dont_catch=True,
+                                    vi_mode=True,
+                                    multiline=True).strip()
             except KeyboardInterrupt:
                 print("\n"*3)
                 break
