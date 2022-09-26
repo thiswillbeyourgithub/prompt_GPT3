@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 
+import fire
 import re
 from pathlib import Path
 import openai
@@ -9,16 +10,7 @@ from prompt_toolkit import prompt
 from prompt_toolkit.completion import WordCompleter
 
 
-### SETTINGS #####################################
-default_t = 0.1
-maximum_tokens = 4000
-default_language = "english"
-default_translation = "french_to_argentinian"
-default_mode = "freewriting"
-
-### VARIABLES ####################################
-local_dir = "/".join(__file__.split("/")[:-1])
-openai.api_key = str(Path(f"{local_dir}/API_KEY.txt").read_text()).strip()
+### VARIABLES AND PROMPTS ########################
 possible_modes = ["freewriting", "cloze", "translate", "paragraph_cloze"]
 paragraph_cloze = {
         "parser": "Texte: Napoléon est né en 1769 à Ajaccio. Il est connu en tant que premier empereur des Français.\nStructure: Napoléon est (q1:né en 1769) (q2:à Ajaccio). Il est (q3:connu en tant que premier empereur des Français).\n\n Texte: Le pancréas est situé dans la partie postérieure de la cavité abdominale, devant le rachis et les organes rétropéritonéaux. Il est en majeure partie fixe, accolé en arrière par des fascias.\nStructure: Le pancréas est (q1:situé dans la partie postérieure de la cavité abdominale), (q2:devant le rachis et les organes rétropéritonéaux). Il (q3:est en majeure partie fixe), (q4:accolé en arrière) (q5:par des fascias).\n\nTexte: ",
@@ -63,13 +55,28 @@ def query(p, t, maximum_tokens):
             best_of=1, ###################################
             ##### DO NOT CHANGE THE VALUE BEST_OF PLEASE #
             ##############################################
-#           frequency_penalty=0.5,
-#           presence_penalty=0.6,
             frequency_penalty=0,
             presence_penalty=0,
             )
 
-if __name__ == "__main__":
+def run(credentials_path="API_KEY.txt",
+        vi_mode=True,
+        default_temperature=0.1,
+        maximum_tokens=4000,
+        default_language="english",
+        default_translation="french_to_argentinian",
+        default_mode="freewriting",
+        ):
+    """
+    Simple GPT3 prompter. Add your credentials to a file called 'API_KEY.txt"
+    and everything should work out of the box. Users other than the author
+    will probably not care about other modes than 'freewriting' and should
+    ignore them.
+    """
+    credential_file = Path(credentials_path)
+    assert credential_file.exists(), f"No credential file found: '{credential_file}'"
+    openai.api_key = str(Path(credential_file).read_text()).strip()
+    local_dir = "/".join(__file__.split("/")[:-1])
     Path(f"{local_dir}/logs.txt").touch(exist_ok=True)
     logging.basicConfig(filename=f"{local_dir}/logs.txt",
                     filemode='a',
@@ -79,7 +86,7 @@ if __name__ == "__main__":
     language = None
     trans_lan = None
     assert default_translation in translate_prompts.keys(), f"Wrong default translation value: {default_translation}"
-    assert isinstance(default_t, float) and default_t <= 1 and default_t >= 0, f"Wrong default temperature value: {default_t}"
+    assert isinstance(default_temperature, float) and default_temperature <= 1 and default_temperature >= 0, f"Wrong default temperature value: {default_temperature}"
     assert default_language in cloze_prompts.keys(), f"Wrong default value for language: {default_language}"
 
     # load the previous question from the logfile
@@ -102,8 +109,8 @@ if __name__ == "__main__":
         # choose a temperature
         t = ask_user(f"Temperature settings? (0 to 1)\n>")
         if t == "":
-            print(f"Temperature set to {default_t}\n")
-            t = default_t
+            print(f"Temperature set to {default_temperature}\n")
+            t = default_temperature
         else:
             try:
                 t = float(t)
@@ -148,7 +155,7 @@ if __name__ == "__main__":
                 question = ask_user("\n\nWhat's your question?\n> ",
                                     completer_list=previous_questions,
                                     dont_catch=True,
-                                    vi_mode=True,
+                                    vi_mode=vi_mode,
                                     multiline=True).strip()
             except KeyboardInterrupt:
                 print("\n"*3)
@@ -211,3 +218,6 @@ if __name__ == "__main__":
             except Exception as e:
                 print(f"Error : {str(e)}")
                 breakpoint()
+
+if __name__ == "__main__":
+    fire.Fire(run)
