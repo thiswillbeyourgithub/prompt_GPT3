@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 import re
 from pathlib import Path
 import openai
