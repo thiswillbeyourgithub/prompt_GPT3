@@ -7,7 +7,7 @@
 * `pip3 install -r requirements.txt`
 * `git clone https://github.com/thiswillbeyourgithub/prompt_GPT3/`
 * add your license key to a file called "API_KEY.txt"
-* `python3 ./prompter.py`
+* `./prompter.py --help`
 
 ## TODO
 * None
