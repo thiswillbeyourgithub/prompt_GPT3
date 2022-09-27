@@ -73,11 +73,11 @@ def run(credentials_path="API_KEY.txt",
     will probably not care about other modes than 'freewriting' and should
     ignore them.
     """
-    credential_file = Path(credentials_path)
-    assert credential_file.exists(), f"No credential file found: '{credential_file}'"
-    openai.api_key = str(Path(credential_file).read_text()).strip()
     local_dir = "/".join(__file__.split("/")[:-1])
     Path(f"{local_dir}/logs.txt").touch(exist_ok=True)
+    credential_file = Path(f"{local_dir}/{credentials_path}")
+    assert credential_file.exists(), f"No credential file found: '{credential_file}'"
+    openai.api_key = str(Path(credential_file).read_text()).strip()
     logging.basicConfig(filename=f"{local_dir}/logs.txt",
                     filemode='a',
                     format=f"{time.asctime()}: %(message)s")
