@@ -152,7 +152,11 @@ def run(credentials_path="API_KEY.txt",
 
         while True:
             try:
-                question = ask_user("\n\nWhat's your question?\n> ",
+                if vi_mode:
+                    vimodestr = " (vi mode enabled)"
+                else:
+                    vimodestr = ""
+                question = ask_user(f"\n\nPrompt:{vimodestr}\n> ",
                                     completer_list=previous_questions,
                                     dont_catch=True,
                                     vi_mode=vi_mode,
