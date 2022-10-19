@@ -88,4 +88,7 @@ A: that it encapsulates how easily current can flow in a circuit.
 
 The impedance of a circuit is a measure of the overall opposition that the circuit presents to alternating current. It is composed of two components: resistance and reactance. The resistance of a circuit is a measure of the opposition to the flow of current that is due to the collisions of the electrons with the atoms in the conductor. The reactance of a circuit is a measure of the opposition to the flow of current that is due to the inductive or capacitive effects in the circuit.
 ####################
+Q: Explain in details how the words "interleukin" and "cytokine" are related:
+A: Interleukins are a type of cytokine. Cytokines are a class of signaling molecules that are produced by cells and affect the behavior of other cells. Interleukins are a type of cytokine that specifically affects the behavior of leukocytes, or white blood cells.
+####################
 ```
