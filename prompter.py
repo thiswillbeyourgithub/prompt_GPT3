@@ -17,7 +17,11 @@ default_mode = "freewriting"
 ### VARIABLES ####################################
 local_dir = "/".join(__file__.split("/")[:-1])
 openai.api_key = str(Path(f"{local_dir}/API_KEY.txt").read_text()).strip()
-possible_modes = ["freewriting", "cloze", "translate"]
+possible_modes = ["freewriting", "cloze", "translate", "paragraph_cloze"]
+paragraph_cloze = {
+        "parser": "Texte: Napoléon est né en 1769 à Ajaccio. Il est connu en tant que premier empereur des Français.\nStructure: Napoléon est (q1:né en 1769) (q2:à Ajaccio). Il est (q3:connu en tant que premier empereur des Français).\n\n Texte: Le pancréas est situé dans la partie postérieure de la cavité abdominale, devant le rachis et les organes rétropéritonéaux. Il est en majeure partie fixe, accolé en arrière par des fascias.\nStructure: Le pancréas est (q1:situé dans la partie postérieure de la cavité abdominale), (q2:devant le rachis et les organes rétropéritonéaux). Il (q3:est en majeure partie fixe), (q4:accolé en arrière) (q5:par des fascias).\n\nTexte: ",
+        "clozer": "Texte: Napoléon est (q1:né en 1769) (q2:à Ajaccio).\nQuestion1: Napoléon, année de naissance ?<br>{{cc1::Napoléon est né en 1769}}\nQuestion2: Napoléon, lieu de naissance ?<br>{{cc1::Napoléon est né à Ajaccio}}\n\nTexte: "
+        }
 cloze_prompts = {
     "english": "Q: In what year was Napoleon born?\nA: {{c1::Napoleon was born in 1769}}\n\nQ: 1+1?\nA: {{c1::1+1 equals 2}}\n\nQ: Capital of France?\nA: {{c1::Paris is the capital of France}}\n\nQ: ",
     "french": "Q: Année de naissance de Napoléon ?\nA: {{c1::Napoléon est né en 1769}}\n\nQ: 1+1 ?\nA: {{c1::1+1 vaut 2}}\n\nQ: Capitale de la France ?\nA: {{c1::Paris est la capitale de la France}}\n\nQ: "
@@ -43,6 +47,25 @@ def ask_user(q, completer_list=None, dont_catch=False):
         else:
             raise SystemExit()
 
+def query(p, t, maximum_tokens):
+    "sends the question to openAI"
+    return openai.Completion.create(
+            engine="text-davinci-002",
+            #engine="text-curie-001",
+            prompt=p,
+            temperature=t,
+            max_tokens=maximum_tokens,
+            top_p=1,
+            ##############################################
+            ##### DO NOT CHANGE THE VALUE BEST_OF PLEASE #
+            best_of=1, ###################################
+            ##### DO NOT CHANGE THE VALUE BEST_OF PLEASE #
+            ##############################################
+#           frequency_penalty=0.5,
+#           presence_penalty=0.6,
+            frequency_penalty=0,
+            presence_penalty=0,
+            )
 
 if __name__ == "__main__":
     Path(f"{local_dir}/logs.txt").touch(exist_ok=True)
@@ -109,10 +132,13 @@ if __name__ == "__main__":
                 print(f"Language set to {default_translation}\n")
                 trans_lan = default_translation
             assert trans_lan in possible_translation, f"Wrong value for translation: {trans_lan}"
+        elif mode == "paragraph_cloze":
+            parser = paragraph_cloze["parser"]
+            clozer = paragraph_cloze["clozer"]
 
-        log.info(f"\n\nNew session: T={t} ; Mode={mode} ; Language={language} ; Translation={trans_lan}")
+        log.info(f"\n\nNew session args: T={t} ; Mode={mode} ; Language={language} ; Translation={trans_lan}")
 
-        print("\n(Press ctrl+c to go edit settings, again to exit)\n")
+        print("\n(Press ctrl+c to go back to settings, again to exit)\n")
 
         while True:
             try:
@@ -135,30 +161,33 @@ if __name__ == "__main__":
             elif mode == "translate":
                 question = question[0].upper() + question[1:]
                 p = translate_prompts[trans_lan] + question + "'"
-            else:
+            elif mode == "paragraph_cloze":
+                previous_questions.append(question)
+                log.info("Getting struture for prompt :")
+                strc_quer = parser + question + "\nStructure: "
+                log.info(f"Qstructure: {strc_quer}")
+                try:
+                    structure = query(strc_quer, t, maximum_tokens)
+                    structure = structure["choices"][0]["text"]
+                except Exception as err:
+                    log.info(f"Exception when parsing structure: '{err}'")
+                    print(f"Exception when parsing structure: '{err}'")
+                    continue
+                log.info("Astructure: {structure}")
+                print(f"\nStructure parsed:\n{structure}")
+                p = clozer + structure + "\nQuestion1: "
+            elif mode == "freewriting":
+                previous_questions.append(question)
                 p = question
-                previous_questions.append(p)
+            else:
+                raise ValueError
 
             if question == "":
                 print("Empty question.")
                 continue
 
             try:
-                response = openai.Completion.create(
-                        engine="text-davinci-002",
-                        #engine="text-curie-001",
-                        prompt=p,
-                        temperature=t,
-                        max_tokens=maximum_tokens,
-                        top_p=1,
-                        ##############################################
-                        ##### DO NOT CHANGE THE VALUE BEST_OF PLEASE #
-                        best_of=1, ###################################
-                        ##### DO NOT CHANGE THE VALUE BEST_OF PLEASE #
-                        ##############################################
-                        frequency_penalty=0.5,
-                        presence_penalty=0.6
-                        )
+                response = query(p, t, maximum_tokens)
             except KeyboardInterrupt:
                 print("Exit.")
                 raise SystemExit()
