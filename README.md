@@ -1,7 +1,13 @@
 # prompt_GPT3
 
 ## What is this?
-* a quick and dirty script to ask things to openAI's GPT3
+* a quick and dirty script to ask things to openAI's GPT3 with a few features.
+
+### Features
+* vim mode
+* handles multiple line prompts
+* everything is logged to a file
+* autocompletes your previous prompts for quick iterations
 
 ## How can I use this?
 * `pip3 install -r requirements.txt`
