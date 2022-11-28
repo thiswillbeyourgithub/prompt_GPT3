@@ -10,7 +10,7 @@
 * `python3 ./prompter.py`
 
 ## TODO
-* the history is not correctly parsed from the log as lots of prompt are multiline. Split by "Q:" and "A:" instead.
+* None
 
 ## What are 'modes' ?
 * `cloze` mode is what I used to quickly create flashcards for the spaced repetition software Anki. (note that this supports French and English)

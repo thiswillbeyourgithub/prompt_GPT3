@@ -1,3 +1,4 @@
+import re
 from pathlib import Path
 import openai
 import time
@@ -56,18 +57,17 @@ if __name__ == "__main__":
     assert isinstance(default_t, float) and default_t <= 1 and default_t >= 0, f"Wrong default temperature value: {default_t}"
     assert default_language in cloze_prompts.keys(), f"Wrong default value for language: {default_language}"
 
-    loaded_logs = Path(f"{local_dir}/logs.txt").read_text().split("\n")
+    # load the previous question from the logfile
+    loaded_logs = Path(f"{local_dir}/logs.txt").read_text()
     previous_questions = []
-    for line in loaded_logs:
-        if " Q: " in line:
-            inc = 0
-            while inc < len(line):
-                inc+=1
-                if line[inc:].startswith(" Q: "):
-                    candidate = line[inc+4:]
-                    if candidate not in previous_questions and candidate.strip() not in previous_questions and candidate != "":
-                        previous_questions.insert(0, candidate)
-                    break
+    Q = loaded_logs.split(" Q: ")[1:]
+    for q in Q:
+        q = q.split(" A: ")[0].split("\n")
+        for i, line in enumerate(q):
+            if re.match(r" 202\d: ", line[19:25]) is not None:
+                q[i] = q[i][27:]
+        q = "\n".join(q[:-1])
+        previous_questions.insert(0, q)
     if previous_questions:
         print(f"Loaded {len(previous_questions)} previous questions from logs.txt")
     previous_questions.reverse()
