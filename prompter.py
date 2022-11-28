@@ -213,7 +213,7 @@ def run(credentials_path="API_KEY.txt",
             print("\n" + "#" * 20)
 
             try:
-                print(question)
+                print(question, end=" ")
                 ans = str(response["choices"][0]["text"]).strip()
                 print(ans)
                 log.info(f"Q: {question}")
