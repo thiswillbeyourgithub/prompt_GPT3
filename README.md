@@ -9,7 +9,10 @@
 * add your license key to a file called "API_KEY.txt"
 * `python3 ./prompter.py`
 
-## What are the modes ?
+## TODO
+* the history is not correctly parsed from the log as lots of prompt are multiline. Split by "Q:" and "A:" instead.
+
+## What are 'modes' ?
 * `cloze` mode is what I used to quickly create flashcards for the spaced repetition software Anki. (note that this supports French and English)
 * `freewriting` mode can be used to use your own prompts.
 
