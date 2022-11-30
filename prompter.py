@@ -54,7 +54,7 @@ def ask_user(q,
 def ask_gpt(p, t, maximum_tokens):
     "sends the prompt to openAI"
     return openai.Completion.create(
-            engine="text-davinci-002",
+            engine="text-davinci-003",
             # engine="text-curie-001",
             prompt=p,
             temperature=t,
