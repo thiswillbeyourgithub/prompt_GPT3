@@ -109,7 +109,7 @@ def run(credentials_path="API_KEY.txt",
         print(text, *args, **kwargs)
 
     # load the previous prompts for autocompletion
-    pp_file = Path("previous_prompts.json")
+    pp_file = Path(f"{local_dir}/previous_prompts.json")
     prev_prompts = []
     try:
         pl("Loading previous prompts from file.")
@@ -236,7 +236,7 @@ def run(credentials_path="API_KEY.txt",
                 pl("Empty user_prompt.")
                 continue
 
-            # saving previou prompts
+            # saving previous prompts
             json.dump(prev_prompts, pp_file.open("w"))
 
             try:
